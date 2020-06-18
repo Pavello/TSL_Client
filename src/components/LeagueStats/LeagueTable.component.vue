@@ -3,6 +3,7 @@
   <div id="league-navbar">
     <div id="left-title-section"></div>
     <div id="right-icon-section">
+      <font-awesome-icon icon="trophy" size="2x" style=" color: white; "/>
       <font-awesome-icon icon="calendar-alt" size="2x" style=" color: white; "/>
       <font-awesome-icon icon="calendar-check" size="2x" style=" color: white; "/>
     </div>
@@ -63,7 +64,7 @@ export default {
   #right-icon-section{
     display: flex;
     justify-content: space-between;
-    min-width: 80px;
+    min-width: 130px;
   }
 }
 
