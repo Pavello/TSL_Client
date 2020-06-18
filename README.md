@@ -1,4 +1,4 @@
-# vue-ts-ui
+# Frontend for Tennis league app
 
 ## Project setup
 ```
@@ -13,6 +13,8 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
+-> built version is stored in corresponding TSL_Server submodule in 'public' folder
+-> you can change it in vue.config.js file
 ```
 
 ### Run your unit tests
