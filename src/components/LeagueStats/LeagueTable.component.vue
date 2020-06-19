@@ -1,13 +1,5 @@
 <template>
 <div id="container">
-  <div id="league-navbar">
-    <div id="left-title-section"></div>
-    <div id="right-icon-section">
-      <font-awesome-icon icon="trophy" size="2x" style=" color: white; "/>
-      <font-awesome-icon icon="calendar-alt" size="2x" style=" color: white; "/>
-      <font-awesome-icon icon="calendar-check" size="2x" style=" color: white; "/>
-    </div>
-  </div>
   <div id="league-table-container">
     <table>
       <thead>
@@ -49,24 +41,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-#league-navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 40px;
-  background-color: steelblue;
-  max-width: 1000px;
-  margin: 15px auto;
-  padding: 10px;
-
-  #right-icon-section{
-    display: flex;
-    justify-content: space-between;
-    min-width: 130px;
-  }
-}
 
 #league-table-container{
   margin: auto;

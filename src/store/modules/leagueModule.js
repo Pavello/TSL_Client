@@ -4,6 +4,7 @@ const state = {
   leagues: [],
   selectedLeagueId: 0,
   selectedLeagueStats: [],
+  selectedLeagueViewMode: '',
 };
 
 const getters = {
@@ -13,6 +14,7 @@ const getters = {
   getLeagueStats: (state) => state.selectedLeagueStats,
   // eslint-disable-next-line max-len
   getLeagueStatsSortedByPoints: (state) => state.selectedLeagueStats.sort((a, b) => b.playerLeaguePoints - a.playerLeaguePoints),
+  getSelectedLeagueViewMode: (state) => state.selectedLeagueViewMode,
 };
 
 const actions = {
@@ -25,9 +27,13 @@ const actions = {
 
   async selectLeague(context, selectedLeague) {
     console.log(selectedLeague);
-    context.commit('selectLeague', selectedLeague);
+    context.commit('selectLeagueMut', selectedLeague);
   },
 
+  async selectLeagueViewMode(context, selectedLeagueViewMode) {
+    console.log(selectedLeagueViewMode);
+    context.commit('selectLeagueViewModeMut', selectedLeagueViewMode);
+  },
 
   async getLeagueStatsById({ commit }) {
     const response = await axios.get(`api/league/${state.selectedLeagueId}?playerStats`);
@@ -42,8 +48,12 @@ const mutations = {
     state.leagues = leagues;
   },
 
-  selectLeague(state, selectedLeagueId) {
+  selectLeagueMut(state, selectedLeagueId) {
     state.selectedLeagueId = selectedLeagueId;
+  },
+
+  selectLeagueViewModeMut(state, selectedLeagueViewMode) {
+    state.selectedLeagueViewMode = selectedLeagueViewMode;
   },
 
   setSelectedLeagueStats(state, setSelectedLeagueStats) {

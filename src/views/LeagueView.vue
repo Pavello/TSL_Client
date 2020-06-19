@@ -5,7 +5,10 @@
       <div id="league-nav">
 
       </div>
-      <LeagueTableComponent v-if="getSelectedLeagueId != 0" />
+      <LeagueNavbarComponent v-if="getSelectedLeagueId != 0" />
+      <LeagueTableComponent v-if="getSelectedLeagueViewMode === 'leagueTable'" />
+      <LeagueFixtureComponent v-if="getSelectedLeagueViewMode === 'matchesFixture'" />
+      <LeagueMatchesFinishedComponent v-if="getSelectedLeagueViewMode === 'matchesFinished'" />
     </div>
   </div>
 </template>
@@ -14,13 +17,17 @@
 import { mapActions, mapGetters } from 'vuex';
 import LeagueSelectionComponent from '../components/LeagueStats/LeagueSelection.component.vue';
 import LeagueTableComponent from '../components/LeagueStats/LeagueTable.component.vue';
+import LeagueNavbarComponent from '../components/LeagueStats/LeagueNavbar.component.vue';
+import LeagueFixtureComponent from '../components/LeagueStats/LeagueFixture.component.vue';
+import LeagueMatchesFinishedComponent from '../components/LeagueStats/LeagueMatchesFinished.component.vue';
 
 export default {
-  name: 'welcomingComponent',
-
   components: {
     LeagueSelectionComponent,
     LeagueTableComponent,
+    LeagueNavbarComponent,
+    LeagueFixtureComponent,
+    LeagueMatchesFinishedComponent,
   },
 
   created() {
@@ -32,7 +39,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getSelectedLeagueId']),
+    ...mapGetters(['getSelectedLeagueId', 'getSelectedLeagueViewMode']),
   },
 };
 </script>
