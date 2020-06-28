@@ -1,10 +1,13 @@
 import axios from 'axios';
+import * as _ from 'lodash';
+import * as moment from 'moment';
 
 const state = {
   leagues: [],
   selectedLeagueId: 0,
   selectedLeagueStats: [],
   selectedLeagueViewMode: '',
+  matchesFixtures: [],
 };
 
 const getters = {
@@ -15,6 +18,8 @@ const getters = {
   // eslint-disable-next-line max-len
   getLeagueStatsSortedByPoints: (state) => state.selectedLeagueStats.sort((a, b) => b.playerLeaguePoints - a.playerLeaguePoints),
   getSelectedLeagueViewMode: (state) => state.selectedLeagueViewMode,
+  getMatchesFixturesFromState: (state) => state.matchesFixtures,
+  getMatchesFixturesGroups: (state) => _.keys(state.matchesFixtures).map((m) => moment(m)).map((m) => m.locale('pl')).map((m) => m.format('LLLL')),
 };
 
 const actions = {
@@ -41,6 +46,14 @@ const actions = {
 
     commit('setSelectedLeagueStats', response.data.playerLeagueStats);
   },
+
+  async getMatchesFixturesFromApi({ commit }) {
+    const response = await axios.get(`api/match/weekFixtures/${state.selectedLeagueId}`);
+    console.log(response);
+
+    commit('setFixtureMatches', response.data);
+  },
+
 };
 
 const mutations = {
@@ -58,6 +71,10 @@ const mutations = {
 
   setSelectedLeagueStats(state, setSelectedLeagueStats) {
     state.selectedLeagueStats = setSelectedLeagueStats;
+  },
+
+  setFixtureMatches(state, matchesFixturesToSet) {
+    state.matchesFixtures = matchesFixturesToSet;
   },
 };
 

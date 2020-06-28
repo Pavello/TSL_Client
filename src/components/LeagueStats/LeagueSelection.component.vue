@@ -15,11 +15,12 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   methods: {
-    ...mapActions(['selectLeague', 'getLeagueStatsById']),
+    ...mapActions(['selectLeague', 'getLeagueStatsById', 'getMatchesFixturesFromApi']),
 
     selectAndGetLeagueStats(leagueId) {
       this.selectLeague(leagueId);
       this.getLeagueStatsById();
+      this.getMatchesFixturesFromApi();
     },
   },
   computed: {
