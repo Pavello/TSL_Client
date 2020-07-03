@@ -1,6 +1,9 @@
 <template>
    <div id="league-navbar">
     <div id="left-title-section">
+      <span v-if="getSelectedLeagueViewMode === 'leagueTable'">Tabela Ligi</span>
+      <span v-if="getSelectedLeagueViewMode === 'matchesFixture'">Terminarz meczy</span>
+      <span v-if="getSelectedLeagueViewMode === 'matchesFinished'">Mecze zakończone</span>
     </div>
     <div id="right-icon-section">
       <font-awesome-icon icon="trophy" size="2x" style=" color: white; cursor: pointer"
@@ -21,7 +24,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['getSelectedLeagueId', 'getLeagueStatsSortedByPoints']),
+    ...mapGetters(['getSelectedLeagueId', 'getLeagueStatsSortedByPoints', 'getSelectedLeagueViewMode']),
   },
   methods: {
     ...mapActions(['selectLeagueViewMode', 'getLeagueStatsById']),
@@ -40,9 +43,9 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  min-height: 40px;
+  min-height: 30px;
   background-color: steelblue;
-  max-width: 1000px;
+  max-width: 1080px;
   margin: 15px auto;
   padding: 10px;
 
@@ -50,6 +53,11 @@ export default {
     display: flex;
     justify-content: space-between;
     min-width: 130px;
+  }
+
+  #left-title-section{
+    color: white;
+    font-size: 22px;
   }
 }
 </style>
