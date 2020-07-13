@@ -1,5 +1,4 @@
 import axios from 'axios';
-import * as _ from 'lodash';
 import * as moment from 'moment';
 
 const state = {
@@ -7,7 +6,9 @@ const state = {
   selectedLeagueId: 0,
   selectedLeagueStats: [],
   selectedLeagueViewMode: '',
-  matchesFixtures: {},
+  matchesFixtures: [],
+  modalDecisionVisiblity: false,
+  modalDecisionIndexesDTO: {},
 };
 
 const getters = {
@@ -19,17 +20,27 @@ const getters = {
   // eslint-disable-next-line max-len
   getLeagueStatsSortedByPoints: (state) => state.selectedLeagueStats.sort((a, b) => b.playerLeaguePoints - a.playerLeaguePoints),
   getSelectedLeagueViewMode: (state) => state.selectedLeagueViewMode,
+
   getMatchesFixturesFromState: (state) => {
-    const fixturesToArray = _.values(state.matchesFixtures);
-    for (let i = 0; i < fixturesToArray.length; i += 1) {
-      console.log(fixturesToArray.length);
-      for (let k = 0; k < fixturesToArray[i].length; k += 1) {
-        fixturesToArray[i][k].fixture = (moment(fixturesToArray[i][k].fixture).add(-2, 'hours')).format('HH:mm');
+    const fixturesMap = new Map(state.matchesFixtures);
+    const valuesOfFixturesMap = [...fixturesMap.values()];
+
+    for (let i = 0; i < valuesOfFixturesMap.length; i += 1) {
+      for (let k = 0; k < valuesOfFixturesMap[i].length; k += 1) {
+        valuesOfFixturesMap[i][k].fixture = (moment(valuesOfFixturesMap[i][k].fixture).add(-2, 'hours')).format('HH:mm');
       }
     }
-    return fixturesToArray;
+    return valuesOfFixturesMap;
   },
-  getMatchesFixturesGroups: (state) => _.keys(state.matchesFixtures).map((m) => moment(m)).map((m) => m.locale('pl')).map((m) => m.format('Do MMMM YYYY, dddd')),
+
+  getMatchesFixturesGroups: (state) => {
+    const fixturesMap = new Map(state.matchesFixtures);
+    const keysArray = [...fixturesMap.keys()];
+    return keysArray.map((m) => moment(m)).map((m) => m.locale('pl')).map((m) => m.format('Do MMMM YYYY, dddd'));
+  },
+
+  getModalDecisionVisiblity: (state) => state.modalDecisionVisiblity,
+  getmodalDecisionIndexesDTO: (state) => state.modalDecisionIndexesDTO,
 };
 
 const actions = {
@@ -59,6 +70,14 @@ const actions = {
     commit('setFixtureMatches', response.data);
   },
 
+  async setDataForPlayerDecision(context, indexes) {
+    context.commit('setDataForPlayerDecisionMut', indexes);
+  },
+
+  async sendPlayerDecision(context, decisionData) {
+    await axios.put(`api/match/fixtureDecision/${decisionData.matchId}?playerIndex=${decisionData.playerId}`,
+      { decision: decisionData.decision });
+  },
 };
 
 const mutations = {
@@ -80,6 +99,18 @@ const mutations = {
 
   setFixtureMatches(state, matchesFixturesToSet) {
     state.matchesFixtures = matchesFixturesToSet;
+  },
+
+  showModal(state) {
+    state.modalDecisionVisiblity = true;
+  },
+
+  hideModal(state) {
+    state.modalDecisionVisiblity = false;
+  },
+
+  setDataForPlayerDecisionMut(state, indexes) {
+    state.modalDecisionIndexesDTO = { ...indexes };
   },
 };
 

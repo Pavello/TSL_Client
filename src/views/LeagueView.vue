@@ -9,17 +9,21 @@
       <LeagueTableComponent v-if="getSelectedLeagueViewMode === 'leagueTable'" />
       <LeagueFixtureComponent v-if="getSelectedLeagueViewMode === 'matchesFixture'" />
       <LeagueMatchesFinishedComponent v-if="getSelectedLeagueViewMode === 'matchesFinished'" />
+      <ModalMatchDecision v-if="getModalDecisionVisiblity"></ModalMatchDecision>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import {
+  mapActions, mapGetters,
+} from 'vuex';
 import LeagueSelectionComponent from '../components/LeagueStats/LeagueSelection.component.vue';
 import LeagueTableComponent from '../components/LeagueStats/LeagueTable.component.vue';
 import LeagueNavbarComponent from '../components/LeagueStats/LeagueNavbar.component.vue';
-import LeagueFixtureComponent from '../components/LeagueStats/LeagueFixture.component.vue';
+import LeagueFixtureComponent from '../components/LeagueStats/MatchFixtures/LeagueFixture.component.vue';
 import LeagueMatchesFinishedComponent from '../components/LeagueStats/LeagueMatchesFinished.component.vue';
+import ModalMatchDecision from '../components/LeagueStats/MatchFixtures/modalMatchDecision.component.vue';
 
 export default {
   components: {
@@ -28,6 +32,7 @@ export default {
     LeagueNavbarComponent,
     LeagueFixtureComponent,
     LeagueMatchesFinishedComponent,
+    ModalMatchDecision,
   },
 
   created() {
@@ -39,7 +44,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getSelectedLeagueId', 'getSelectedLeagueViewMode']),
+    ...mapGetters(['getSelectedLeagueId', 'getSelectedLeagueViewMode', 'getModalDecisionVisiblity']),
   },
 };
 </script>
