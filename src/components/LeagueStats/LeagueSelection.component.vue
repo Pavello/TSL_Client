@@ -25,13 +25,16 @@ export default {
       this.selectLeague(leagueId);
       this.getLeagueStatsById();
       this.getMatchesFixturesFromApi();
-      this.selectLeagueViewMode('leagueTable');
+      if (this.getSelectedLeagueViewMode === '') {
+        this.selectLeagueViewMode('leagueTable');
+      }
     },
   },
   computed: {
     ...mapGetters([
       'getActiveLeagues',
       'getSelectedLeagueId',
+      'getSelectedLeagueViewMode',
     ]),
   },
 };

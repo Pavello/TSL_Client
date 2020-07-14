@@ -5,12 +5,19 @@
       <div id="league-nav">
 
       </div>
+
       <LeagueNavbarComponent v-if="getSelectedLeagueId != 0" />
-      <LeagueTableComponent v-if="getSelectedLeagueViewMode === 'leagueTable'" />
-      <LeagueFixtureComponent v-if="getSelectedLeagueViewMode === 'matchesFixture'" />
-      <LeagueMatchesFinishedComponent v-if="getSelectedLeagueViewMode === 'matchesFinished'" />
+      <transition name="tableTrans">
+        <LeagueTableComponent v-if="getSelectedLeagueViewMode === 'leagueTable'" />
+      </transition>
+      <transition name="fixtureTrans">
+        <LeagueFixtureComponent v-if="getSelectedLeagueViewMode === 'matchesFixture'" />
+      </transition>
+      <transition name="finishTrans">
+        <LeagueMatchesFinishedComponent v-if="getSelectedLeagueViewMode === 'matchesFinished'" />
+      </transition>
       <transition name="modal">
-      <ModalMatchDecision v-if="getModalDecisionVisiblity"></ModalMatchDecision>
+        <ModalMatchDecision v-if="getModalDecisionVisiblity"></ModalMatchDecision>
       </transition>
     </div>
   </div>
@@ -71,4 +78,39 @@ export default {
   opacity: 0;
 }
 
+.tableTrans-enter-active {
+  transition: opacity .9s;
+}
+
+.tableTrans-leave-active{
+  transition: opacity .09s;
+}
+
+.tableTrans-enter, .tableTrans-leave-to {
+  opacity: 0;
+}
+
+.fixtureTrans-enter-active  {
+  transition: opacity 0.9s;
+}
+
+.fixtureTrans-leave-active{
+  transition: opacity .09s;
+}
+
+.fixtureTrans-enter, .fixtureTrans-leave-to {
+  opacity: 0;
+}
+
+.finishTrans-enter-active  {
+  transition: opacity 0.9s;
+}
+
+.finishTrans-leave-active{
+  transition: opacity .09s;
+}
+
+.finishTrans-enter, .finishTrans-leave-to {
+  opacity: 0;
+}
 </style>
