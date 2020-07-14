@@ -1,10 +1,9 @@
 <template>
   <tbody>
     <tr class="fixture">
-          <td class="firstPlayer" @click="setValuesForDecision(0); showModal(); toggleSiema()"
+          <td class="firstPlayer" @click="setValuesForDecision(0); showModal();"
           v-bind:class="[{confirmed : match.matchPlayerData[0].fixtureDecision == 1 },
-          {rejected : match.matchPlayerData[0].fixtureDecision == 2 }]">
-          {{match.matchPlayerData[0].player.firstName}}
+          {rejected : match.matchPlayerData[0].fixtureDecision == 2 }]">{{match.matchPlayerData[0].player.firstName}}
           {{match.matchPlayerData[0].player.lastName}}</td>
           <td class="sign">:</td>
           <td class="secondPlayer" @click="setValuesForDecision(1); showModal()"
@@ -21,11 +20,6 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
-  data() {
-    return {
-      siema: false,
-    };
-  },
   methods: {
     ...mapMutations(['hideModal', 'showModal']),
     ...mapActions(['setDataForPlayerDecision']),
@@ -35,10 +29,6 @@ export default {
         matchId: this.matchIndex,
         playerId: playerIndex,
       });
-    },
-    toggleSiema() {
-      console.log(this.siema);
-      this.siema = !this.siema;
     },
   },
   computed: {
@@ -62,11 +52,11 @@ export default {
     }
 
     .confirmed {
-      background-color: #03A011;
+      background-color: #4aab52;
     }
 
     .rejected {
-      background-color: rgb(216, 4, 4);
+      background-color: rgb(245, 76, 76);
     }
 
     td{
@@ -75,6 +65,11 @@ export default {
       text-align: center;
       vertical-align: middle;
       border: 1px solid rgb(167, 167, 167);
+    }
+
+    p{
+      margin: 0;
+      padding: 0;
     }
 
     .firstPlayer {

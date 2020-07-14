@@ -3,7 +3,7 @@
     <div class="container">
       <button v-for="league in getActiveLeagues"
       :key="league.id"
-      :style=" (getSelectedLeagueId == league.id) ? { 'background-color': '#03A011' } : null"
+      :style=" (getSelectedLeagueId == league.id) ? { 'background-color': '#4aab52' } : null"
       @click="selectAndGetLeagueStats(league.id)">
       <span v-if="league.halfSeason === 'summer'">Lato</span>
       <span v-if="league.halfSeason === 'winter'">Zima</span>

@@ -9,7 +9,9 @@
       <LeagueTableComponent v-if="getSelectedLeagueViewMode === 'leagueTable'" />
       <LeagueFixtureComponent v-if="getSelectedLeagueViewMode === 'matchesFixture'" />
       <LeagueMatchesFinishedComponent v-if="getSelectedLeagueViewMode === 'matchesFinished'" />
+      <transition name="modal">
       <ModalMatchDecision v-if="getModalDecisionVisiblity"></ModalMatchDecision>
+      </transition>
     </div>
   </div>
 </template>
@@ -60,4 +62,13 @@ export default {
   min-width: 60px;
   background: lightseagreen;
 }
+
+.modal-enter-active, .modal-leave-active {
+  transition: opacity .3s; ;
+}
+
+.modal-enter, .modal-leave-to {
+  opacity: 0;
+}
+
 </style>
