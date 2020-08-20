@@ -8,18 +8,20 @@
         <router-view/>
     </main>
     <footer>
-      FOOTER
+      <Footer></Footer>
     </footer>
     </div>
 </template>
 <script>
 import Navbar from './views/Navbar.vue';
+import Footer from './views/Footer.vue';
 import Welcoming from './components/HomePage/welcoming.component.vue';
 
 export default {
   components: {
     Navbar,
     Welcoming,
+    Footer,
   },
 };
 </script>
@@ -43,9 +45,20 @@ html, body {
   width: 100%;
   margin: auto;
 
-header{
+main {
   width: 100%;
-  background-color: $dark;
+  height: 100%;
+}
+
+  header {
+    width: 100%;
+    background-color: $dark;
   }
+
+  footer {
+    width: 100%;
+    background-color: $dark;
+  }
+
 }
 </style>
