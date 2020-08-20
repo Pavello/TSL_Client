@@ -5,7 +5,6 @@
             <h1>{{phoneNumber}}</h1>
         </div>
         <div id="right-section">
-          <div class="menu-item"><router-link to="/news">Aktualności</router-link></div>
           <div class="menu-item"><router-link to="/offer">Oferta</router-link></div>
           <div class="menu-item"><router-link to="/prices">Cennik</router-link></div>
           <div class="menu-item"><router-link to="/location">Jak nas znaleźć</router-link></div>

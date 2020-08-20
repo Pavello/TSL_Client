@@ -20,6 +20,11 @@ const routes = [
     name: 'Leagues',
     component: () => import('../views/LeagueView.vue'),
   },
+  {
+    path: '/news/:id',
+    name: 'News',
+    component: () => import('../components/HomePage/Newsletter_section/detailedNews.component.vue'),
+  },
 ];
 
 const router = new VueRouter({

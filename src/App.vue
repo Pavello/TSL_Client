@@ -2,9 +2,9 @@
   <div id="app">
     <header>
       <navbar />
+      <Welcoming />
     </header>
     <main>
-        <Welcoming />
         <router-view/>
     </main>
     <footer>
@@ -46,6 +46,7 @@ html, body {
   margin: auto;
 
 main {
+  min-height: 500px;
   width: 100%;
   height: 100%;
 }

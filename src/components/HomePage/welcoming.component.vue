@@ -1,7 +1,7 @@
 <template>
   <section id="showcase">
       <div class="container">
-        <h1>Witaj na Skośnej!</h1>
+        <router-link to="/">Witaj na Skośnej!</router-link>
         <p>Zagraj z nami w tenisa w świetnej atmosferze!</p>
     </div>
   </section>
@@ -42,6 +42,16 @@ h1{
   font-size: 3em;
   animation: fadeIn 3s;
 }
+
+  a{
+  padding: 0;
+  margin: 20px 0px 0px 10px;
+  max-width: 30%;
+  color: antiquewhite;
+  font-size: 3em;
+  animation: fadeIn 3s;
+  text-decoration: none;
+  }
 
 p{
   padding: 0;

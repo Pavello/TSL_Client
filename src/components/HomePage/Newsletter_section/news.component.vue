@@ -3,7 +3,7 @@
           <h1>{{news.title}}</h1>
           <h3>{{news.date}}</h3>
           <p>{{news.content}}</p>
-          <button>Czytaj więcej</button>
+          <button><router-link :to="`/news/${news.id}`">Czytaj więcej</router-link></button>
       </div>
 </template>
 
@@ -31,6 +31,11 @@ export default {
                 border-radius: 10px;
                 margin: 8px 12px 8px 12px;
                 padding: 5px 5px;
+                a {
+                  color: inherit;
+                  text-decoration: none;
+                  font-size: inherit;
+                }
             }
   };
 </style>
