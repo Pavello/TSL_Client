@@ -9,6 +9,7 @@ const state = {
   matchesFixtures: [],
   modalDecisionVisiblity: false,
   modalDecisionIndexesDTO: {},
+  finishedMatchesFromLeague: [],
 };
 
 const getters = {
@@ -41,6 +42,7 @@ const getters = {
 
   getModalDecisionVisiblity: (state) => state.modalDecisionVisiblity,
   getmodalDecisionIndexesDTO: (state) => state.modalDecisionIndexesDTO,
+  getFinishedMatchesFromLeague: (state) => state.finishedMatchesFromLeague,
 };
 
 const actions = {
@@ -78,6 +80,12 @@ const actions = {
     await axios.put(`api/match/fixtureDecision/${decisionData.matchId}?playerIndex=${decisionData.playerId}`,
       { decision: decisionData.decision });
   },
+
+  async getFinishedMatchesFromLeague({ commit }) {
+    const response = await axios.get(`api/match/finishedMatches/${state.selectedLeagueId}`);
+
+    commit('setFinishedMatchesFromLeague', response.data);
+  },
 };
 
 const mutations = {
@@ -111,6 +119,10 @@ const mutations = {
 
   setDataForPlayerDecisionMut(state, indexes) {
     state.modalDecisionIndexesDTO = { ...indexes };
+  },
+
+  setFinishedMatchesFromLeague(state, finishedMatchesFromApi) {
+    state.finishedMatchesFromLeague = finishedMatchesFromApi;
   },
 };
 

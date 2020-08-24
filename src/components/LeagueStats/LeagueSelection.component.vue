@@ -19,12 +19,13 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   methods: {
-    ...mapActions(['selectLeague', 'getLeagueStatsById', 'getMatchesFixturesFromApi', 'selectLeagueViewMode']),
+    ...mapActions(['selectLeague', 'getLeagueStatsById', 'getMatchesFixturesFromApi', 'getFinishedMatchesFromLeague', 'selectLeagueViewMode']),
 
     selectAndGetLeagueStats(leagueId) {
       this.selectLeague(leagueId);
       this.getLeagueStatsById();
       this.getMatchesFixturesFromApi();
+      this.getFinishedMatchesFromLeague();
       if (this.getSelectedLeagueViewMode === '') {
         this.selectLeagueViewMode('leagueTable');
       }
